@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const db = require("../controllers/tracksController");
 
-router.post('/', (req, res, next) => {
-  res.status(200).json({
-    message: 'Post track'
-  })
+router.post('/', async (req, res, next) => {
+  
 });
 
-router.get('/', (req, res, next) => {
-  res.status(200).json({
-    message: 'Get all tracks'
-  })
+router.get('/', async (req, res, next) => {
+  const track = await db.getAllTracks();
+  res.status(200).json({ track: track  });
 });
 
 router.get('/:id', (req, res, next) => {
