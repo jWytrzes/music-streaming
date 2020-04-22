@@ -1,15 +1,12 @@
 const express = require('express');
-const router = express.Router();
 const controller = require("../controllers/tracksController");
+const router = express.Router();
 
-router.post('/', async (req, res, next) => {
-  
-});
 
 router.get('/', async (req, res, next) => {
   try {
-    const track = await controller.getAllTracks();
-    res.status(200).json({ track: track  });
+    const tracks = await controller.getAllTracks();
+    res.status(200).json({ tracks: tracks  });
   }
   catch(error) {
     res.status(error.status || 500).json({
@@ -23,6 +20,10 @@ router.get('/:id', (req, res, next) => {
   res.status(200).json({
     message: `Get track, id: ${id}`
   })
+});
+
+router.post('/', async (req, res, next) => {
+  
 });
 
 router.patch('/:id', (req, res, next) => {

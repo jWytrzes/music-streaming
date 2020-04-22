@@ -1,6 +1,6 @@
 const typeorm = require("typeorm");
 
-const EntitySchema = typeorm.EntitySchema({
+const userSchema = new typeorm.EntitySchema({
   name: "user",
   columns: {
     ID: {
@@ -16,10 +16,12 @@ const EntitySchema = typeorm.EntitySchema({
     },
   },
   relations: {
-    //song?
+    playlists: {
+      target: "playlist",
+      type: "one-to-many",
+      inverseSide: "user",
+    }
   }
 })
 
-module.exports = {
-  EntitySchema
-}
+module.exports = userSchema;

@@ -1,6 +1,6 @@
 const typeorm = require("typeorm");
 
-const EntitySchema = new typeorm.EntitySchema({
+const ArtistSchema = new typeorm.EntitySchema({
   name: "artist",
   columns: {
     ID: {
@@ -21,10 +21,14 @@ const EntitySchema = new typeorm.EntitySchema({
       type: "one-to-many",
       inverseSide: "artist",
       onDelete: "CASCADE"
+    },
+    tracks: {
+      target: "track",
+      type: "one-to-many",
+      inverseSide: "artist",
+      onDelete: "CASCADE"
     }
   }
 })
 
-module.exports = {
-  EntitySchema
-}
+module.exports = ArtistSchema;

@@ -13,14 +13,13 @@ const genreSchema = new typeorm.EntitySchema({
     },
   },
   relations: {
-    track: {
+    tracks: {
       target: "track",
       type: "one-to-many",
       inverseSide: "genre",
+      onDelete: 'CASCADE'
     }
   }
 })
 
-module.exports = {
-  genreSchema
-}
+module.exports = genreSchema;

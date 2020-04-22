@@ -1,6 +1,6 @@
 const typeorm = require("typeorm");
 
-const EntitySchema = typeorm.EntitySchema({
+const playlistSchema = new typeorm.EntitySchema({
   name: "playlist",
   columns: {
     ID: {
@@ -16,19 +16,21 @@ const EntitySchema = typeorm.EntitySchema({
     },
   },
   relations: {
-    //user ID
+    user: {
+      target: "user",
+      type: "many-to-one",
+      inverseSide: "playlists"
+    },
+    tracks: {
+      target: "track",
+      type: "many-to-many",
+      inverseSide: "playlists",
+      eager: true,
+      cascade: true,
+      //onDelete: 'CASCADE',
+    },
     
-    // track: {
-    //   target: "track",
-    //   type: "many-to-many",
-    //   inverseSide: "playlists",
-    //   eager: true,
-    //   cascade: true,
-    //   onDelete: 'CASCADE',
-    // }
   }
 })
 
-module.exports = {
-  EntitySchema
-}
+module.exports = playlistSchema;

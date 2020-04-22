@@ -16,23 +16,28 @@ const trackSchema = new typeorm.EntitySchema({
     }
   },
   relations: {
-    // album: {
-    //   target: "album",
-    //   type: "one-to-one",
-    //   inverseSide: "album"
-    // }
+    album: {
+      target: "album",
+      type: "many-to-one",
+      inverseSide: "tracks"
+    },
+    artist: {
+      target: "artist",
+      type: "many-to-one",
+      inverseSide: "tracks"
+    },
     genre: {
       target: "genre",
       type: "many-to-one",
       inverseSide: "tracks",
       cascade: true
     },
-    // playlists: {
-    //   target: "playlist",
-    //   type: "many-to-many",
-    //   inverseSide: "tracks",
-    //   joinTable: true,
-    // }
+    playlists: {
+      target: "playlist",
+      type: "many-to-many",
+      inverseSide: "tracks",
+      joinTable: true,
+    }
   }
 })
 

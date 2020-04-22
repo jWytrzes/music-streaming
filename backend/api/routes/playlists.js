@@ -1,15 +1,22 @@
 const express = require('express');
+const controller = require("../controllers/playlistsController");
 const router = express.Router();
+
+router.get('/', async (req, res, next) => {
+  try {
+    const playlists = await controller.getAllPlaylists();
+    res.status(200).json({ playlists: playlists  });
+  }
+  catch(error) {
+    res.status(error.status || 500).json({
+      message: error.message
+    })
+  }
+});
 
 router.post('/', (req, res, next) => {
   res.status(200).json({
     message: 'Post playlist'
-  })
-});
-
-router.get('/', (req, res, next) => {
-  res.status(200).json({
-    message: 'Get all playlists'
   })
 });
 
