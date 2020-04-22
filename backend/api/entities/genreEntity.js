@@ -17,7 +17,6 @@ const genreSchema = new typeorm.EntitySchema({
       target: "track",
       type: "one-to-many",
       inverseSide: "genre",
-      onDelete: 'CASCADE'
     }
   }
 })

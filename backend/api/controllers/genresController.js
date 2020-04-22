@@ -1,11 +1,11 @@
 const database = require("../../databaseConnection");
-const genre = require("../entities/genreEntity");
+const genreEntity = require("../entities/genreEntity");
 const track = require("../entities/trackEntity");
 
 exports.getAllGenres = async (req, res, next) => {
   try {
     const connection = await database.makeConnection();
-    const genres = await connection.getRepository(genre).find({relations: ["tracks"]})
+    const genres = await connection.getRepository(genreEntity).find({relations: ["tracks"]})
     res.status(200).json({ genres: genres  });
   }
   catch(error) {
@@ -16,14 +16,10 @@ exports.getAllGenres = async (req, res, next) => {
 }
 
 exports.addGenre = async(req, res, next) => {
-  const newGenre = {
-    name: req.body.name
-  }
-
   try {
     const connection = await database.makeConnection();
-    await connection.getRepository(genre).save(newGenre);
-    res.status(200).json({ newGenre  });
+    await connection.getRepository(genreEntity).save(req.body);
+    res.status(200).json({ message: "Genre added"  });
   }
   catch(error) {
     res.status(error.status || 500).json({
@@ -37,7 +33,7 @@ exports.editGenre = async(req, res, next) => {
   const newGenreData = req.body;
   try {
     const connection = await database.makeConnection();
-    await connection.getRepository(genre).update(id, newGenreData);
+    await connection.getRepository(genreEntity).update(id, newGenreData);
     res.status(200).json({
       message: 'Genre updated'
     });
@@ -53,8 +49,21 @@ exports.deleteGenre = async(req, res, next) => {
   const id = req.params.id;
   try {
     const connection = await database.makeConnection();
-    //const relatedTracks = await connection.getRepository(track).find({genre.ID: id})
-    await connection.getRepository(genre).delete(id);
+    const tracks = connection.getRepository(track);
+    const relatedTracks = await tracks.find({
+      relations:["genre"], 
+      where: {
+      genre: {
+        ID: id
+      }
+    }});
+    await relatedTracks.forEach(async item => {
+      const current = item;
+      current.genre = null;
+      await tracks.save(current);
+    });
+
+    await connection.getRepository(genreEntity).delete(id);
     res.status(200).json({ message: 'Genre deleted.' });
   }
   catch(error) {

@@ -12,10 +12,12 @@ const albumSchema = new typeorm.EntitySchema({
       type: "varchar"
     },
     release_date: {
-      type: "date"
+      type: "date",
+      nullable: true
     },
     description: {
-      type: "varchar"
+      type: "varchar",
+      nullable: true
     },
   },
   relations: {

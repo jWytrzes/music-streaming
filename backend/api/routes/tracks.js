@@ -3,41 +3,14 @@ const controller = require("../controllers/tracksController");
 const router = express.Router();
 
 
-router.get('/', async (req, res, next) => {
-  try {
-    const tracks = await controller.getAllTracks();
-    res.status(200).json({ tracks: tracks  });
-  }
-  catch(error) {
-    res.status(error.status || 500).json({
-      message: error.message
-    })
-  }
-});
+router.get('/', controller.getAllTracks);
 
-router.get('/:id', (req, res, next) => {
-  const id = req.params.id;
-  res.status(200).json({
-    message: `Get track, id: ${id}`
-  })
-});
+router.get('/:id', controller.getTrack);
 
-router.post('/', async (req, res, next) => {
-  
-});
+router.post('/',controller.addTrack);
 
-router.patch('/:id', (req, res, next) => {
-  const id = req.params.id;
-  res.status(200).json({
-    message: `Edit track, id: ${id}`
-  })
-});
+router.patch('/:id', controller.editTrack);
 
-router.delete('/:id', (req, res, next) => {
-  const id = req.params.id;
-  res.status(200).json({
-    message: `Delete track, id: ${id}`
-  })
-});
+router.delete('/:id', controller.deleteTrack);
 
 module.exports = router;

@@ -19,7 +19,9 @@ const playlistSchema = new typeorm.EntitySchema({
     user: {
       target: "user",
       type: "many-to-one",
-      inverseSide: "playlists"
+      inverseSide: "playlists",
+      nullable: false,
+      onDelete: 'CASCADE'
     },
     tracks: {
       target: "track",
@@ -27,7 +29,6 @@ const playlistSchema = new typeorm.EntitySchema({
       inverseSide: "playlists",
       eager: true,
       cascade: true,
-      //onDelete: 'CASCADE',
     },
     
   }

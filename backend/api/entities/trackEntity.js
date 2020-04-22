@@ -19,7 +19,8 @@ const trackSchema = new typeorm.EntitySchema({
     album: {
       target: "album",
       type: "many-to-one",
-      inverseSide: "tracks"
+      inverseSide: "tracks",
+      nullable: true
     },
     artist: {
       target: "artist",
@@ -30,7 +31,7 @@ const trackSchema = new typeorm.EntitySchema({
       target: "genre",
       type: "many-to-one",
       inverseSide: "tracks",
-      cascade: true
+      // cascade: true,
     },
     playlists: {
       target: "playlist",
