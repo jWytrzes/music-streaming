@@ -20,7 +20,6 @@ const userSchema = new typeorm.EntitySchema({
       target: "playlist",
       type: "one-to-many",
       inverseSide: "user",
-      
     }
   }
 })

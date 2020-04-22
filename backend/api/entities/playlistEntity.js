@@ -12,7 +12,8 @@ const playlistSchema = new typeorm.EntitySchema({
       type: "varchar"
     },
     description: {
-      type: "varchar"
+      type: "varchar",
+      nullable: true
     },
   },
   relations: {

@@ -9,7 +9,8 @@ const ArtistSchema = new typeorm.EntitySchema({
       generated: true,
     },
     is_band: {
-      type: "boolean"
+      type: "boolean",
+      nullable: true,
     },
     name: {
       type: "varchar"
