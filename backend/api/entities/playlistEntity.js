@@ -17,14 +17,15 @@ const EntitySchema = typeorm.EntitySchema({
   },
   relations: {
     //user ID
-    track: {
-      target: "track",
-      type: "many-to-many",
-      inverseSide: "playlists",
-      eager: true,
-      cascade: true,
-      onDelete: 'CASCADE',
-    }
+    
+    // track: {
+    //   target: "track",
+    //   type: "many-to-many",
+    //   inverseSide: "playlists",
+    //   eager: true,
+    //   cascade: true,
+    //   onDelete: 'CASCADE',
+    // }
   }
 })
 

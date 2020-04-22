@@ -1,15 +1,9 @@
 const typeorm = require("typeorm");
-const app = require("../../app");
+const database = require("../../databaseConnection");
+const track = require("../entities/trackEntity");
 
-app.connect();
-
-const getAllTracks = async() => {
-  const connection = await app.connect();
-  return connection.getRepository("track").find({
-    relations: ["genre"]
-  });
-}
-
-module.exports = {
-  getAllTracks
+exports.getAllTracks = async() => {
+  const connection = await database.makeConnection();
+  console.log(track);
+  return connection.getRepository("track").find({relations: ["genre"]});
 }

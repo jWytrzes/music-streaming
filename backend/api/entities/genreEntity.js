@@ -1,6 +1,6 @@
 const typeorm = require("typeorm");
 
-const genreSchema = typeorm.EntitySchema({
+const genreSchema = new typeorm.EntitySchema({
   name: "genre",
   columns: {
     ID: {
@@ -13,7 +13,6 @@ const genreSchema = typeorm.EntitySchema({
     },
   },
   relations: {
-    //song?
     track: {
       target: "track",
       type: "one-to-many",

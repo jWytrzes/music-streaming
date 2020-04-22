@@ -1,6 +1,6 @@
 const typeorm = require("typeorm");
 
-const EntitySchema = typeorm.EntitySchema({
+const EntitySchema = new typeorm.EntitySchema({
   name: "artist",
   columns: {
     ID: {

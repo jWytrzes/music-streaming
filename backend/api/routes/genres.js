@@ -13,13 +13,6 @@ router.get('/', (req, res, next) => {
   })
 });
 
-router.get('/:id', (req, res, next) => {
-  const id = req.params.id;
-  res.status(200).json({
-    message: `Get genre, id: ${id}`
-  })
-});
-
 router.patch('/:id', (req, res, next) => {
   const id = req.params.id;
   res.status(200).json({

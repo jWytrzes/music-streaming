@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const typeorm = require("typeorm");
 
 const albumsRoutes = require('./api/routes/albums');
 const artistsRoutes = require('./api/routes/artists');
@@ -8,29 +7,6 @@ const tracksRoutes = require('./api/routes/tracks');
 const playlistsRoutes = require('./api/routes/playlists');
 const genresRoutes = require('./api/routes/genres');
 const usersRoutes = require('./api/routes/users');
-
-const connect = async() => {
-  try {
-    console.log(1);
-    return typeorm.getConnection();
-  }
-  catch {
-    console.log(2);
-    return typeorm.createConnection({
-      type: "postgres",
-      host: "localhost",
-      port: '5432',
-      username: "postgres",
-      password: "admin",
-      database: "musicStreaming",
-      synchronize: true,
-      entities: [
-        "src/entity/*.js"
-      ]
-    })
-  }
-}
-
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
@@ -67,7 +43,4 @@ app.use((error, req, res, next) => {
   });
 });
 
-module.exports = {
-  app,
-  connect
-};
+module.exports = app

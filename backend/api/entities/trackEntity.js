@@ -1,6 +1,6 @@
 const typeorm = require("typeorm");
 
-const trackSchema = typeorm.EntitySchema({
+const trackSchema = new typeorm.EntitySchema({
   name: "track",
   columns: {
     ID: {
@@ -27,15 +27,13 @@ const trackSchema = typeorm.EntitySchema({
       inverseSide: "tracks",
       cascade: true
     },
-    playlists: {
-      target: "playlist",
-      type: "many-to-many",
-      inverseSide: "tracks",
-      joinTable: true,
-    }
+    // playlists: {
+    //   target: "playlist",
+    //   type: "many-to-many",
+    //   inverseSide: "tracks",
+    //   joinTable: true,
+    // }
   }
 })
 
-module.exports = {
-  trackSchema
-}
+module.exports = trackSchema;

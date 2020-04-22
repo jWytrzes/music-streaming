@@ -10,7 +10,9 @@
   "author": "Joanna Wytrzęś",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg": "^8.0.2",
+    "typeorm": "^0.2.24"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
