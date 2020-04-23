@@ -18,7 +18,7 @@ const CreateGenrePopup = ({ submit, closePopup }) => {
 				<div>
 					<Heading size={4}> Add new genre </Heading>
 					<form>
-						<label htmlFor='#name'> Name: </label>
+						<label htmlFor='#name'> Name: <span className="required">*</span> </label>
 						<input type='text' value={name} id='name' onChange={(e) => setName(e.target.value)} />
 						<br />
 					</form>

@@ -19,7 +19,6 @@ const Users = ({history}) => {
   }, [refresh])
 
   const addUser= async (data) => {
-    console.log(data);
     const result = await fetch('http://localhost:3001/Users/', {
       method: 'POST',
       body: JSON.stringify({

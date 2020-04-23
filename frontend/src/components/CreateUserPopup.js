@@ -19,10 +19,10 @@ const CreateUserPopup = ({ submit, closePopup }) => {
 				<div>
 					<Heading size={4}> Add new user </Heading>
 					<form>
-						<label htmlFor='#name'> First name: </label>
+						<label htmlFor='#name'> First name: <span className="required">*</span></label>
 						<input type='text' value={firstName} id='name' onChange={(e) => setName(e.target.value)} />
 						<br />
-            <label htmlFor='#lastname'> Last name: </label>
+            <label htmlFor='#lastname'> Last name: <span className="required">*</span></label>
 						<input type='text' value={lastName} id='lastname' onChange={(e) => setLastname(e.target.value)} />
 						<br />
 					</form>

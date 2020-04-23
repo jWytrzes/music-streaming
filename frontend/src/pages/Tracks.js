@@ -27,8 +27,8 @@ const Tracks = ({ history }) => {
 			body: JSON.stringify({
 				...data,
 				artistID: data.artistID,
-				artistID: data.artistID,
-				artistID: data.artistID,
+				albumID: data.albumID,
+				genreID: data.genreID,
 			}),
 			headers: {
 				'Content-type': 'application/json',

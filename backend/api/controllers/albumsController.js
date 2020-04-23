@@ -55,7 +55,6 @@ exports.getAlbum = async (req, res, next) => {
 }
 
 exports.addAlbum = async(req, res, next) => {
-  console.log(req.body);
   try {
     const connection = await database.makeConnection();
     await connection.getRepository(albumEntity).save({
@@ -103,7 +102,7 @@ exports.deleteAlbum = async(req, res, next) => {
         }
       }
     });
-    console.log(relatedTracks);
+    
     await relatedTracks.forEach(async item => {
       const current = item;
       current.album = null;

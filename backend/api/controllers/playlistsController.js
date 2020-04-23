@@ -89,10 +89,7 @@ exports.editPlaylist = async (req, res, next) => {
     const playlist = await playlists.findOne({relations: ["tracks"], where: {
       ID: id
     }} );
-    console.log(playlist)
-    console.log('PL CONTROLLER 11111: ', req.body, playlist);
-    if(playlist) {
-      console.log('PL CONTROLLER: ', playlist);
+    if(playlist) {;
       trackList.forEach(async trackId => {
         const newTrack = await connection.getRepository(trackEntity).findOne({
           relations: ["artist", "album"], 
@@ -101,7 +98,6 @@ exports.editPlaylist = async (req, res, next) => {
           }
         });
         await playlist.tracks.push(newTrack);
-        console.log(playlist);
         await playlists.save(playlist);
       })
     }

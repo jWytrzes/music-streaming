@@ -25,6 +25,8 @@ const Playlist = () => {
 						<small> ID: {playlist.ID} </small>
             <Heading size={1}>Playlist: "{playlist.name}"</Heading>
 					</div>
+					<p> {playlist.description} </p>
+					<br/>
           <small> User: {playlist.user && playlist.user.firstName} {playlist.user && playlist.user.lastName} </small>
           <div>
           <Columns>

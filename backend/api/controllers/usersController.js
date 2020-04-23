@@ -32,7 +32,6 @@ exports.getUser = async (req, res, next) => {
 }
 
 exports.addUser = async(req, res, next) => {
-  console.log(req.body);
   try {
     const connection = await database.makeConnection();
     await connection.getRepository(userEntity).save(req.body);

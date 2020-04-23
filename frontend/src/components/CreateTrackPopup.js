@@ -9,8 +9,8 @@ const CreateTrackPopup = ({ submit, closePopup }) => {
   const [genres, setGenres] = useState('');
   
 	const [artistID, setArtistID] = useState('');
-	const [albumID, setAlbumID] = useState('');
-	const [genreID, setGenreID] = useState('');
+	const [albumID, setAlbumID] = useState(null);
+	const [genreID, setGenreID] = useState(null);
   
   useEffect(() => {
     const fetchData = async() => {
@@ -41,12 +41,12 @@ const CreateTrackPopup = ({ submit, closePopup }) => {
 				</Button>
 				<br />
 				<div>
-					<Heading size={4}> Add new album </Heading>
+					<Heading size={4}> Add new track </Heading>
 					<form>
-						<label htmlFor='#name'> Name: </label>
+						<label htmlFor='#name'> Name: <span className="required">*</span></label>
 						<input type='text' value={name} id='name' onChange={(e) => setName(e.target.value)} />
 						<br />
-						<label htmlFor='#duration'> Duration [sec]: </label>
+						<label htmlFor='#duration'> Duration [sec]: <span className="required">*</span></label>
 						<input
 							type='number'
 							value={duration}
@@ -54,7 +54,7 @@ const CreateTrackPopup = ({ submit, closePopup }) => {
 							onChange={(e) => setDuration(e.target.value)}
 						/>
 						<br />
-						<label htmlFor='#artist'> Select artist: </label>
+						<label htmlFor='#artist'> Select artist: <span className="required">*</span></label>
 						<select name='artist' id='artist' value={artistID} onChange={(e) => setArtistID(e.target.value)}>
               <option value=""> Choose </option>
 							{artists && artists.map((artist) => <option key={artist.ID} value={artist.ID}>{artist.name}</option>)}

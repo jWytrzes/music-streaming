@@ -130,3 +130,7 @@
   border: 1px solid #ddd;
   padding: 80px 0;
 }
+
+.required {
+  color: red;
+}

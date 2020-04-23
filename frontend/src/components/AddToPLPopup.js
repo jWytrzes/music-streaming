@@ -28,7 +28,7 @@ const CreatePlaylistPopup = ({ submit, closePopup }) => {
 				<div>
 					<Heading size={4}> Choose playlist </Heading>
 					<form>
-						<label htmlFor='#pl'> Select playlist: </label>
+						<label htmlFor='#pl'> Select playlist: <span className="required">*</span></label>
 						<select name='pl' id='pl' value={playlistID} onChange={(e) => setPlaylistID(e.target.value)}>
               <option value={undefined}> Choose </option>
 							{playlists && playlists.map((pl) => <option key={pl.ID} value={pl.ID}>{pl.name}</option>)}

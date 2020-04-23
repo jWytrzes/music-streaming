@@ -27,3 +27,7 @@ Po zakończeniu instalacji należy uruchomić aplikację za pomocą komendy:
 
 
     npm start
+
+## Baza danych
+
+Baza danych wykorzystana w projkecie to PostgreSQL

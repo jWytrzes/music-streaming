@@ -32,6 +32,7 @@ const trackSchema = new typeorm.EntitySchema({
 			target: 'genre',
 			type: 'many-to-one',
 			inverseSide: 'tracks',
+			nullable: true
 		},
 		playlists: {
 			target: 'playlist',

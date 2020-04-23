@@ -23,7 +23,7 @@ const Artist = () => {
 				<div className='artist'>
 					<div className='artist__heading'>
 						<small> ID: {artist.ID} </small>
-						<Heading size={1}>Artist</Heading>
+						<Heading size={1}>Artist: {artist.name} </Heading>
 					</div>
 
           <div>
@@ -45,9 +45,6 @@ const Artist = () => {
 								{artist.tracks.map((track) => (
 									<List.Item>
 										<Heading size={4}> {track.name} </Heading>
-                    <small> Genre: {track.genre ? track.genre.name : 'no data'} </small>
-                    <br/>
-                    <small> Album: {track.album ? track.album.name : 'no data'} </small>
 									</List.Item>
 								))}
 							</List>

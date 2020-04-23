@@ -29,10 +29,6 @@ const Artists = ({history}) => {
         "Content-type": "application/json"
       }
     });
-    console.log({
-      ...data,
-      is_band: data.isBand
-    });
     const json = await result.json();
     if(json.status === 200) {
       setRefresh(true);

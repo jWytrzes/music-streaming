@@ -31,7 +31,7 @@ const CreateTrackPopup = ({ submit, closePopup }) => {
 				<div>
 					<Heading size={4}> Add new album </Heading>
 					<form>
-						<label htmlFor='#name'> Name: </label>
+						<label htmlFor='#name'> Name: <span className="required">*</span> </label>
 						<input type='text' value={name} id='name' onChange={(e) => setName(e.target.value)} />
 						<br />
 						<label htmlFor='#description'> Description: </label>
@@ -51,7 +51,7 @@ const CreateTrackPopup = ({ submit, closePopup }) => {
 						/>
 						<br />
 						<br />
-						<label htmlFor='#artist'> Select artist: </label>
+						<label htmlFor='#artist'> Select artist: <span className="required">*</span></label>
 						<select name='artist' id='artist' value={artistID} onChange={(e) => setArtistID(e.target.value)}>
               <option value=""> Choose </option>
 							{artists && artists.map((artist) => <option key={artist.ID} value={artist.ID}>{artist.name}</option>)}

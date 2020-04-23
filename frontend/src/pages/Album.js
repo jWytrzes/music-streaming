@@ -25,6 +25,8 @@ const Album = () => {
 						<small> ID: {album.ID} </small>
             <Heading size={1}>Album: "{album.name}"</Heading>
 					</div>
+					<p> {album.description} </p>
+					<br/>
           <small> Author: {album.artist.name} </small>
           <div>
           <Columns>
