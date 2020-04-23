@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Heading, Card, Columns, Button } from 'react-bulma-components';
-import CreateUserPopup from '../components/CreateUserPopup';
+import CreateGenrePopup from '../components/CreateGenrePopup';
 
-const Users = ({history}) => {
-  const [users, setUsers] = useState([]);
+const Genres = ({history}) => {
+  const [genres, setGenres] = useState([]);
   const [addPopup, setAddPopup] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     setRefresh(false);
     const fetchData = async() => {
-      const result = await fetch('http://localhost:3001/Users/');
+      const result = await fetch('http://localhost:3001/genres/');
       const json = await result.json();
-      setUsers(json.users);
+      setGenres(json.genres);
     }
     fetchData();
   }, [refresh])
 
-  const addUser= async (data) => {
-    console.log(data);
-    const result = await fetch('http://localhost:3001/Users/', {
+  const addGenre= async (data) => {
+    const result = await fetch('http://localhost:3001/genres/', {
       method: 'POST',
       body: JSON.stringify({
         ...data,
@@ -39,8 +38,8 @@ const Users = ({history}) => {
     }
   }
 
-  const deleteUser = async(id) => {
-    const result = await fetch(`http://localhost:3001/Users/${id}`, {
+  const deleteGenre = async(id) => {
+    const result = await fetch(`http://localhost:3001/genres/${id}`, {
       method: 'DELETE',
       headers: {
         "Content-type": "application/json"
@@ -59,33 +58,32 @@ const Users = ({history}) => {
     <div className="albums">
       <div className="albums__heading artists__heading">
       <Heading size={1}> 
-        Users
+        Genres
       </Heading>
-      <Button color="success" onClick={() => setAddPopup(true)}> Add new user + </Button>
+      <Button color="success" onClick={() => setAddPopup(true)}> Add new genre + </Button>
       </div>
       
-      { users &&users.length && users.map(user => (
-          <Card key={user.ID}>
+      { genres &&genres.length && genres.map(genre => (
+          <Card key={genre.ID}>
             <Card.Content>
               <Columns>
                 <Columns.Column size="one-quarter">
-                  <small> ID: { user.ID }  </small>
-                  <Heading size={4}> {user.firstName} {user.lastName} </Heading>
-                  <small>Playlists: {user.playlists.map(pl => pl.name + ', ')}</small>
+                  <small> ID: { genre.ID }  </small>
+                  <Heading size={4}> {genre.name} </Heading>
                 </Columns.Column>
                 <Columns.Column></Columns.Column>
                 <Columns.Column size="one-fifth">
                   <Button.Group className="artists__buttons">
-                    <Button color="danger" onClick={() => deleteUser(user.ID)}> X </Button>
+                    <Button color="danger" onClick={() => deleteGenre(genre.ID)}> X </Button>
                   </Button.Group>
                 </Columns.Column>
               </Columns>
             </Card.Content>
           </Card>
         ))}
-        {addPopup && <CreateUserPopup closePopup={() => setAddPopup(false)} submit={addUser}/> }
+        {addPopup && <CreateGenrePopup closePopup={() => setAddPopup(false)} submit={addGenre}/> }
     </div>
   )
 }
 
-export default withRouter(Users)
+export default withRouter(Genres)

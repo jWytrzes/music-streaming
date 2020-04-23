@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Heading, Card, Columns, Button } from 'react-bulma-components';
-import CreateUserPopup from '../components/CreateUserPopup';
+import CreateAlbumPopup from '../components/CreateAlbumPopup';
 
-const Users = ({history}) => {
-  const [users, setUsers] = useState([]);
+const Albums = ({history}) => {
+  const [albums, setAlbums] = useState([]);
   const [addPopup, setAddPopup] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     setRefresh(false);
     const fetchData = async() => {
-      const result = await fetch('http://localhost:3001/Users/');
+      const result = await fetch('http://localhost:3001/albums/');
       const json = await result.json();
-      setUsers(json.users);
+      setAlbums(json.albums);
     }
     fetchData();
   }, [refresh])
 
-  const addUser= async (data) => {
-    console.log(data);
-    const result = await fetch('http://localhost:3001/Users/', {
+  const addAlbum = async (data) => {
+    const result = await fetch('http://localhost:3001/albums/', {
       method: 'POST',
       body: JSON.stringify({
         ...data,
+        artistID: data.artistID
       }),
       headers: {
         "Content-type": "application/json"
@@ -39,8 +39,8 @@ const Users = ({history}) => {
     }
   }
 
-  const deleteUser = async(id) => {
-    const result = await fetch(`http://localhost:3001/Users/${id}`, {
+  const deleteAlbum = async(id) => {
+    const result = await fetch(`http://localhost:3001/albums/${id}`, {
       method: 'DELETE',
       headers: {
         "Content-type": "application/json"
@@ -59,33 +59,39 @@ const Users = ({history}) => {
     <div className="albums">
       <div className="albums__heading artists__heading">
       <Heading size={1}> 
-        Users
+        Albums
       </Heading>
-      <Button color="success" onClick={() => setAddPopup(true)}> Add new user + </Button>
+      <Button color="success" onClick={() => setAddPopup(true)}> Add new album + </Button>
       </div>
+      <small> Quantity: {albums.length} </small>
       
-      { users &&users.length && users.map(user => (
-          <Card key={user.ID}>
+      { albums &&albums.length && albums.map(album => (
+          <Card key={album.ID}>
             <Card.Content>
               <Columns>
                 <Columns.Column size="one-quarter">
-                  <small> ID: { user.ID }  </small>
-                  <Heading size={4}> {user.firstName} {user.lastName} </Heading>
-                  <small>Playlists: {user.playlists.map(pl => pl.name + ', ')}</small>
+                  <small> ID: { album.ID }  </small>
+                  <Heading size={4}> {album.name} </Heading>
                 </Columns.Column>
-                <Columns.Column></Columns.Column>
+                <Columns.Column >
+                  <div size={6}> Tracks: {album.tracks.length} </div>
+                  <div size={6}> Author: {album.artist.name} </div>
+                </Columns.Column>
                 <Columns.Column size="one-fifth">
                   <Button.Group className="artists__buttons">
-                    <Button color="danger" onClick={() => deleteUser(user.ID)}> X </Button>
+                    <Button color="info" onClick={() => {
+                      history.push(`/albums/${album.ID}`)
+                    }}> > </Button>
+                    <Button color="danger" onClick={() => deleteAlbum(album.ID)}> X </Button>
                   </Button.Group>
                 </Columns.Column>
               </Columns>
             </Card.Content>
           </Card>
         ))}
-        {addPopup && <CreateUserPopup closePopup={() => setAddPopup(false)} submit={addUser}/> }
+        {addPopup && <CreateAlbumPopup closePopup={() => setAddPopup(false)} submit={addAlbum}/> }
     </div>
   )
 }
 
-export default withRouter(Users)
+export default withRouter(Albums)
