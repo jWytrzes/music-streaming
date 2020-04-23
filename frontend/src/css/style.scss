@@ -1,0 +1,12 @@
+.artists {
+  &__buttons {
+    justify-content: flex-end;
+    height: 100%;
+  }
+
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
