@@ -19,7 +19,7 @@ exports.addGenre = async(req, res, next) => {
   try {
     const connection = await database.makeConnection();
     await connection.getRepository(genreEntity).save(req.body);
-    res.status(200).json({ message: "Genre added"  });
+    res.status(200).json({status:200, message: "Genre added"  });
   }
   catch(error) {
     res.status(error.status || 500).json({
@@ -64,7 +64,7 @@ exports.deleteGenre = async(req, res, next) => {
     });
 
     await connection.getRepository(genreEntity).delete(id);
-    res.status(200).json({ message: 'Genre deleted.' });
+    res.status(200).json({status:200, message: 'Genre deleted.' });
   }
   catch(error) {
     res.status(error.status || 500).json({

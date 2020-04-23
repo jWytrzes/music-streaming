@@ -4,6 +4,8 @@ const router = express.Router();
 
 router.get('/', controller.getAllAlbums);
 
+router.get('/artist/:id', controller.getByArtistID);
+
 router.get('/:id', controller.getAlbum);
 
 router.post('/', controller.addAlbum);

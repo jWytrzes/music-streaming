@@ -43,7 +43,7 @@ exports.addPlaylist = async(req, res, next) => {
   try {
     const connection = await database.makeConnection();
     await connection.getRepository(playlistEntity).save(newPlaylist);
-    res.status(200).json({ message: "Playlist added" });
+    res.status(200).json({status:200, message: "Playlist added" });
   }
   catch(error) {
     res.status(error.status || 500).json({
@@ -71,7 +71,7 @@ exports.deletePlaylist = async(req, res, next) => {
     });
 
     await connection.getRepository(playlistEntity).delete(id);
-    res.status(200).json({ message: 'Playlist deleted.' });
+    res.status(200).json({status:200, message: 'Playlist deleted.' });
   }
   catch(error) {
     res.status(error.status || 500).json({
@@ -83,13 +83,16 @@ exports.deletePlaylist = async(req, res, next) => {
 exports.editPlaylist = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const trackList = JSON.parse(req.body.trackList);
+    const trackList = req.body.trackList;
     const connection = await database.makeConnection();
-    const playlists = connection.getRepository(playlistEntity);
+    const playlists = await connection.getRepository(playlistEntity);
     const playlist = await playlists.findOne({relations: ["tracks"], where: {
       ID: id
-    }} )
+    }} );
+    console.log(playlist)
+    console.log('PL CONTROLLER 11111: ', req.body, playlist);
     if(playlist) {
+      console.log('PL CONTROLLER: ', playlist);
       trackList.forEach(async trackId => {
         const newTrack = await connection.getRepository(trackEntity).findOne({
           relations: ["artist", "album"], 
@@ -97,7 +100,8 @@ exports.editPlaylist = async (req, res, next) => {
             ID: trackId
           }
         });
-        playlist.tracks.push(newTrack);
+        await playlist.tracks.push(newTrack);
+        console.log(playlist);
         await playlists.save(playlist);
       })
     }
@@ -105,7 +109,7 @@ exports.editPlaylist = async (req, res, next) => {
       throw new Error("Playlist not found");
     }
     
-    res.status(200).json({ message: "Playlist updated" });
+    res.status(200).json({status:200, message: "Playlist updated" });
   }
   catch(error) {
     res.status(error.status || 500).json({

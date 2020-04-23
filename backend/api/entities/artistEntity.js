@@ -21,13 +21,15 @@ const ArtistSchema = new typeorm.EntitySchema({
       target: "album",
       type: "one-to-many",
       inverseSide: "artist",
-      onDelete: "CASCADE"
+      onDelete: "CASCADE",
+      nullable: true,
     },
     tracks: {
       target: "track",
       type: "one-to-many",
       inverseSide: "artist",
-      onDelete: "CASCADE"
+      onDelete: "CASCADE",
+      nullable: true,
     }
   }
 })

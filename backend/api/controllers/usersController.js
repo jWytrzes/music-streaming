@@ -32,10 +32,11 @@ exports.getUser = async (req, res, next) => {
 }
 
 exports.addUser = async(req, res, next) => {
+  console.log(req.body);
   try {
     const connection = await database.makeConnection();
     await connection.getRepository(userEntity).save(req.body);
-    res.status(200).json({ message: "User added" });
+    res.status(200).json({status:200, message: "User added" });
   }
   catch(error) {
     res.status(error.status || 500).json({
@@ -50,7 +51,7 @@ exports.deleteUser = async(req, res, next) => {
     const connection = await database.makeConnection();
     const users = await connection.getRepository(userEntity);
     await users.delete(id);
-    res.status(200).json({ message: 'User deleted.' });
+    res.status(200).json({status:200, message: 'User deleted.' });
   }
   catch(error) {
     res.status(error.status || 500).json({

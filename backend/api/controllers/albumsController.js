@@ -16,6 +16,28 @@ exports.getAllAlbums = async (req, res, next) => {
   }
 }
 
+exports.getByArtistID = async (req, res, next) => {
+  const artistId = req.params.id;
+  try {
+    const connection = await database.makeConnection();
+    const albums = await connection.getRepository(albumEntity).find({
+      relations: ["artist", "tracks"],
+      where: {
+        artist: {
+          ID: artistId
+        }
+      }
+    });
+    albums && res.status(200).json({ albums });
+    throw new Error('Album not found');
+  }
+  catch(error) {
+    res.status(error.status || 500).json({
+      message: error.message
+    })
+  }
+}
+
 exports.getAlbum = async (req, res, next) => {
   const id = req.params.id;
   try {
@@ -33,6 +55,7 @@ exports.getAlbum = async (req, res, next) => {
 }
 
 exports.addAlbum = async(req, res, next) => {
+  console.log(req.body);
   try {
     const connection = await database.makeConnection();
     await connection.getRepository(albumEntity).save({
@@ -41,7 +64,7 @@ exports.addAlbum = async(req, res, next) => {
         ID: req.body.artistID
       }
     });
-    res.status(200).json({ message: "Album added" });
+    res.status(200).json({ status: 200, message: "Album added" });
   }
   catch(error) {
     res.status(error.status || 500).json({
@@ -88,7 +111,7 @@ exports.deleteAlbum = async(req, res, next) => {
     });
 
     await connection.getRepository(albumEntity).delete(id);
-    res.status(200).json({ message: 'Album deleted.' });
+    res.status(200).json({status: 200, message: 'Album deleted.' });
   }
   catch(error) {
     res.status(error.status || 500).json({

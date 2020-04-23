@@ -8,7 +8,7 @@ const playlistsRoutes = require('./api/routes/playlists');
 const genresRoutes = require('./api/routes/genres');
 const usersRoutes = require('./api/routes/users');
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use((req, res, next) => {
