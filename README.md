@@ -16,6 +16,7 @@ Po zakończeniu instalacji należy uruchomić serwer za pomocą komendy
     npm start
 
 ## Uruchomienie aplikacji frontend
+
 Z folderu głównego należy przejść do folderu /frontend, zainstalować niezbędne dependecje za pomocą komendy:
 
 
