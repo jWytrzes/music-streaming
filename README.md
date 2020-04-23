@@ -6,25 +6,23 @@ Aby uruchomić projekt niezbędne jest zainstalowanie [Node.js](https://nodejs.o
 
 Aby uruchomić serwer, należy przejść do folderu /backend, zainstalować niezbędne dependecje za pomocą komendy
 
-```
-npm install
-```
+
+    npm install
+
 
 Po zakończeniu instalacji należy uruchomić serwer za pomocą komendy
 
-```
-npm start
-```
 
-##Uruchomienie aplikacji frontendowej
+    npm start
+
+## Uruchomienie aplikacji frontend
 Z folderu głównego należy przejść do folderu /frontend, zainstalować niezbędne dependecje za pomocą komendy:
 
-```
-npm install
-```
+
+    npm install
+
 
 Po zakończeniu instalacji należy uruchomić aplikację za pomocą komendy:
 
-```
-npm start
-```
+
+    npm start
